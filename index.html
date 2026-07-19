@@ -659,18 +659,27 @@ const PHOTOS=[
   {f:'local-ski',    cat:'residence',wide:false, fr:'Casier à skis chauffé', en:'Heated ski locker'}
 ];
 
-/* ============ CALENDRIER — ÉDITABLE ============
-   Modifiez les périodes ci-dessous. Format : 'AAAA-MM-JJ'.
-   'start' = 1re nuit, 'end' = nuit de départ (exclue).
+/* ============ CALENDRIER ============
+   Périodes synchronisées depuis l'Excel de pilotage (Dropbox).
+   'start' = 1re nuit, 'end' = jour de départ (non coloré).
    status : 'booked' (réservé) ou 'option' (en attente).
-   START_YM / MONTHS = 1er mois affiché et nombre de mois.            */
+   Le calendrier démarre automatiquement au mois courant.            */
 const CAL_CONFIG={
-  startYear:2026, startMonth:12,   // décembre 2026
-  months:8,                        // affiche 8 mois
+  monthsToShow:12,                 // nb de mois affichés à partir du mois courant
   ranges:[
-    {start:'2026-12-20', end:'2027-01-03', status:'booked'},
-    {start:'2027-02-07', end:'2027-02-14', status:'booked'},
-    {start:'2027-02-21', end:'2027-02-28', status:'option'}
+    /* --- Été / automne 2026 --- */
+    {start:'2026-07-04', end:'2026-07-11', status:'booked'},
+    {start:'2026-07-12', end:'2026-07-24', status:'booked'},
+    {start:'2026-07-24', end:'2026-07-31', status:'booked'},
+    {start:'2026-07-31', end:'2026-08-07', status:'booked'},
+    {start:'2026-08-14', end:'2026-08-21', status:'booked'},
+    /* --- Hiver 2026-2027 --- */
+    {start:'2026-12-19', end:'2026-12-23', status:'booked'},
+    {start:'2026-12-23', end:'2027-01-02', status:'booked'},
+    {start:'2027-01-02', end:'2027-01-09', status:'booked'},
+    {start:'2027-02-06', end:'2027-02-13', status:'booked'},
+    {start:'2027-02-13', end:'2027-02-20', status:'booked'},
+    {start:'2027-02-20', end:'2027-02-27', status:'option'}
   ]
 };
 
@@ -741,8 +750,8 @@ function buildCalendar(){
   var monthsFR=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
   var monthsEN=['January','February','March','April','May','June','July','August','September','October','November','December'];
   var daysFR=['L','M','M','J','V','S','D'], today=iso(new Date());
-  var y=CAL_CONFIG.startYear, m=CAL_CONFIG.startMonth-1;
-  for(var k=0;k<CAL_CONFIG.months;k++){
+  var now0=new Date(), y=now0.getFullYear(), m=now0.getMonth();
+  for(var k=0;k<CAL_CONFIG.monthsToShow;k++){
     var mm=m+k, yy=y+Math.floor(mm/12), mo=((mm%12)+12)%12;
     var first=new Date(yy,mo,1), start=(first.getDay()+6)%7; // lundi=0
     var ndays=new Date(yy,mo+1,0).getDate();
