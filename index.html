@@ -570,6 +570,10 @@ html[lang="fr"] .en-only{display:none}
         </div>
       </div>
       <form class="enquiry" onsubmit="return sendEnquiry(event)">
+        <input type="hidden" name="access_key" value="56f0e445-5de2-4cd4-8617-d74534286547">
+        <input type="hidden" name="subject" value="Nouvelle demande — Lodge Le Chamois (site web)">
+        <input type="hidden" name="from_name" value="Site Lodge Le Chamois">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
         <div class="row">
           <div><label data-fr="Nom" data-en="Name">Nom</label><input type="text" name="nom" required></div>
           <div><label data-fr="Email" data-en="Email">Email</label><input type="email" name="email" required></div>
@@ -583,6 +587,7 @@ html[lang="fr"] .en-only{display:none}
         <label data-fr="Votre message" data-en="Your message">Votre message</label>
         <textarea name="message" data-fr-ph="Dites-nous en plus sur votre séjour…" data-en-ph="Tell us more about your stay…" placeholder="Dites-nous en plus sur votre séjour…"></textarea>
         <button type="submit" class="btn btn-primary" data-fr="Envoyer la demande" data-en="Send request">Envoyer la demande</button>
+        <p id="formMsg" style="margin-top:14px;font-size:14px"></p>
       </form>
     </div>
   </div>
@@ -774,13 +779,26 @@ function buildCalendar(){
 function sendEnquiry(e){
   e.preventDefault();
   var f=e.target, fr=document.documentElement.lang==='fr';
-  var subj=(fr?'Demande de réservation — Lodge Le Chamois':'Booking request — Lodge Le Chamois');
-  var body=(fr?'Nom':'Name')+': '+f.nom.value+'\n'+
-           'Email: '+f.email.value+'\n'+
-           (fr?'Arrivée':'Arrival')+': '+f.arrivee.value+'\n'+
-           (fr?'Départ':'Departure')+': '+f.depart.value+'\n'+
-           (fr?'Personnes':'Guests')+': '+f.personnes.value+'\n\n'+f.message.value;
-  window.location.href='mailto:reservation@lodgelechamois.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+  var btn=f.querySelector('button[type=submit]'), msg=document.getElementById('formMsg');
+  btn.disabled=true; btn.textContent=fr?'Envoi…':'Sending…';
+  fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(f)})
+    .then(function(r){return r.json();})
+    .then(function(j){
+      if(j.success){
+        f.reset(); btn.style.display='none';
+        msg.style.color='var(--forest)';
+        msg.textContent=fr?'Merci ! Votre demande a bien été envoyée. Nous vous répondons rapidement.':'Thank you! Your request has been sent. We will get back to you shortly.';
+      }else{
+        msg.style.color='#b00020';
+        msg.textContent=fr?'Une erreur est survenue. Réessayez ou écrivez-nous à reservation@lodgelechamois.com.':'Something went wrong. Please try again or email reservation@lodgelechamois.com.';
+        btn.disabled=false; btn.textContent=fr?'Envoyer la demande':'Send request';
+      }
+    })
+    .catch(function(){
+      msg.style.color='#b00020';
+      msg.textContent=fr?'Erreur réseau. Écrivez-nous à reservation@lodgelechamois.com.':'Network error. Please email reservation@lodgelechamois.com.';
+      btn.disabled=false; btn.textContent=fr?'Envoyer la demande':'Send request';
+    });
   return false;
 }
 
