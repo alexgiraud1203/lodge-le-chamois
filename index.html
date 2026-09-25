@@ -711,9 +711,8 @@ html[lang="fr"] .en-only{display:none}
   </div>
 </section>
 
-</main>
-
 <a href="#contact" class="m-cta" id="mCta"><span data-fr="Demander mes dates" data-en="Request my dates">Demander mes dates</span><small data-fr="dès 290 € la nuit" data-en="from €290 per night">dès 290 € la nuit</small></a>
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -839,7 +838,7 @@ function buildGallery(cat){
   PHOTOS.filter(function(p){return cat==='all'||p.cat===cat;}).forEach(function(p){
     var d=document.createElement('div');
     d.className='gal-item'+(p.wide?' wide':'');
-    d.innerHTML='<img loading="lazy" src="./'+p.f+'.jpg" alt="'+L(p)+'"><div class="cap">'+L(p)+'</div>';
+    d.innerHTML='<img loading="lazy" src="./'+p.f+'.jpg" alt=""><div class="cap" aria-hidden="true">'+L(p)+'</div>';
     d.onclick=function(){openLb(p.f,d);};
     d.setAttribute('role','button'); d.tabIndex=0;
     d.setAttribute('aria-label',(document.documentElement.lang==='en'?'Enlarge: ':'Agrandir : ')+L(p));
