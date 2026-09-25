@@ -7,6 +7,9 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="description" content="Lodge Le Chamois : appartement 4 étoiles 83 m² pour 6 personnes au cœur des Carroz d'Arâches, Grand Massif. Terrasse 45 m², bain nordique, 3 chambres.">
 <link rel="canonical" href="https://lodgelechamois.com/">
+<link rel="alternate" hreflang="fr" href="https://lodgelechamois.com/">
+<link rel="alternate" hreflang="en" href="https://lodgelechamois.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://lodgelechamois.com/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Lodge Le Chamois — Location 4★ aux Carroz d'Arâches, Grand Massif">
 <meta property="og:description" content="Appartement de charme 83 m² pour 6 personnes, terrasse de 45 m² exposée ouest et nord et bain nordique, au centre des Carroz d'Arâches (Grand Massif).">
@@ -277,6 +280,24 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .m-cta{display:none}
 @media(min-width:901px) and (max-width:1120px){.nav-links{gap:16px}}
 
+/* 3 actions 25/09 */
+.good-to-know{margin-top:28px;background:var(--white);border:1px solid var(--line);border-radius:4px;padding:24px 28px}
+.good-to-know h4{font-size:1.35rem;margin-bottom:10px;color:var(--forest-dark)}
+.good-to-know ul{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:10px 28px;padding:0;margin:0}
+.good-to-know li{font-size:14.5px;color:var(--muted);line-height:1.45}
+.good-to-know b{color:var(--ink);font-weight:600;display:block}
+.cal-hint{text-align:center;font-size:14px;color:var(--ink);margin-top:22px}
+.cal-days .pick{cursor:pointer}
+.cal-days .pick:hover{background:var(--cream-2)}
+.cal-days .pick.sel{background:var(--forest);color:#fff}
+.form-legal{margin-top:12px;font-size:12.5px;color:var(--muted);line-height:1.5}
+.form-legal a{color:var(--wood-dark);text-decoration:underline}
+.platforms-wrap{margin-top:34px;text-align:center}
+.platforms-wrap .platforms{justify-content:center;max-width:760px;margin:12px auto 0}
+.foot-bottom a{color:inherit;text-decoration:underline}
+@media(max-width:900px){.good-to-know ul{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.good-to-know ul{grid-template-columns:1fr}}
+
 /* i18n */
 [data-en]{}
 html[lang="en"] .fr-only{display:none}
@@ -327,8 +348,8 @@ html[lang="fr"] .en-only{display:none}
       <a href="blog/index.html" data-fr="Blog" data-en="Blog">Blog</a>
       <a href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
       <div class="lang-toggle">
-        <button data-lang="fr" class="active" onclick="setLang('fr')">FR</button>
-        <button data-lang="en" onclick="setLang('en')">EN</button>
+        <button data-lang="fr" class="active" onclick="location.href='/'">FR</button>
+        <button data-lang="en" onclick="location.href='/en/'">EN</button>
       </div>
     </nav>
     <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
@@ -440,7 +461,8 @@ html[lang="fr"] .en-only{display:none}
     </div>
     <div class="cal-grid" id="calGrid"></div>
     <div class="center more-wrap"><button type="button" class="btn btn-outline" id="calMore" data-fr="Voir les mois suivants" data-en="Show later months">Voir les mois suivants</button></div>
-    <p class="cal-note" data-fr="Calendrier mis à jour manuellement. Pour toute demande, écrivez-nous à reservation@lodgelechamois.com." data-en="Calendar updated manually. For any request, email us at reservation@lodgelechamois.com.">Calendrier mis à jour manuellement. Pour toute demande, écrivez-nous à reservation@lodgelechamois.com.</p>
+    <p class="cal-hint" data-fr="Astuce : cliquez sur votre date d'arrivée puis sur votre date de départ pour préremplir la demande." data-en="Tip: click your arrival date, then your departure date, to prefill your request.">Astuce : cliquez sur votre date d'arrivée puis sur votre date de départ pour préremplir la demande.</p>
+    <p class="cal-note"><span data-fr="Calendrier mis à jour le" data-en="Calendar updated on">Calendrier mis à jour le</span> <span id="calUpdated"></span>. <span data-fr="Pour toute question : reservation@lodgelechamois.com." data-en="Any question: reservation@lodgelechamois.com.">Pour toute question : reservation@lodgelechamois.com.</span></p>
     <div class="center" style="margin-top:26px"><a href="#contact" class="btn btn-primary" data-fr="Demander une réservation" data-en="Request a booking">Demander une réservation</a></div>
   </div>
 </section>
@@ -484,6 +506,17 @@ html[lang="fr"] .en-only{display:none}
       </tbody>
     </table>
     <p class="price-note" data-fr="Taxe de séjour en sus (≈ 2,60 € / adulte / nuit). Linge de maison et ménage de fin de séjour inclus en hiver, en option le reste de l'année. Bain nordique en option. Un devis précis vous est adressé selon vos dates et le nombre de personnes." data-en="Tourist tax not included (≈ €2.60 / adult / night). Bed linen and end-of-stay cleaning included in winter, optional the rest of the year. Nordic bath optional. A precise quote is sent according to your dates and party size.">Taxe de séjour en sus (≈ 2,60 € / adulte / nuit). Linge de maison et ménage de fin de séjour inclus en hiver, en option le reste de l'année. Bain nordique en option.</p>
+    <div class="good-to-know">
+      <h4 data-fr="Bon à savoir" data-en="Good to know">Bon à savoir</h4>
+      <ul>
+        <li data-fr="<b>Arrivée</b> à partir de 17h" data-en="<b>Check-in</b> from 5 pm"><b>Arrivée</b> à partir de 17h</li>
+        <li data-fr="<b>Départ</b> avant 10h" data-en="<b>Check-out</b> before 10 am"><b>Départ</b> avant 10h</li>
+        <li data-fr="<b>Durée minimale</b> selon la saison, précisée dans le devis" data-en="<b>Minimum stay</b> depends on the season, stated in your quote"><b>Durée minimale</b> selon la saison, précisée dans le devis</li>
+        <li data-fr="<b>Caution</b> demandée avant l'arrivée" data-en="<b>Security deposit</b> requested before arrival"><b>Caution</b> demandée avant l'arrivée</li>
+        <li data-fr="<b>Animaux</b> acceptés sous conditions, à préciser lors de la demande" data-en="<b>Pets</b> welcome under conditions, please mention them in your request"><b>Animaux</b> acceptés sous conditions, à préciser lors de la demande</li>
+        <li data-fr="<b>Linge et ménage</b> inclus en hiver" data-en="<b>Linen and cleaning</b> included in winter"><b>Linge et ménage</b> inclus en hiver</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -625,13 +658,6 @@ html[lang="fr"] .en-only{display:none}
         <div class="line"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4h3.5l2 5-2.5 1.5a11 11 0 0 0 5.5 5.5l1.5-2.5 5 2V19a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></div><div><b data-fr="Téléphone" data-en="Phone">Téléphone</b><a href="tel:+33683829413" data-fr="06 83 82 94 13" data-en="+33 6 83 82 94 13">06 83 82 94 13</a></div></div>
         <div class="line"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><b data-fr="Adresse" data-en="Address">Adresse</b>265 route de Flaine, Domaine du Bois Blanc<br>74300 Les Carroz d'Arâches</div></div>
         <div class="line"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 17a7 7 0 0 1 14 0"/><path d="M3 17h18"/><path d="M12 10V8"/><path d="M10 8h4"/><path d="M4 20h16"/></svg></div><div><b data-fr="Conciergerie" data-en="Concierge service">Conciergerie</b>Clémentine</div></div>
-        <p style="font-size:13.5px;color:var(--muted);margin-top:8px" data-fr="Aussi disponible sur les plateformes de réservation :" data-en="Also available on booking platforms:">Aussi disponible sur les plateformes de réservation :</p>
-        <div class="platforms">
-          <a href="https://www.airbnb.fr/rooms/1554908940653071797" target="_blank" rel="noopener" data-fr="Voir sur Airbnb" data-en="View on Airbnb">Airbnb ↗</a>
-          <a href="https://www.greengo.voyage/hote/lodge-le-chamois-les-carroz-d-araches-6-personnes-83-m2-bain-nordique-et-grande-terrasse" target="_blank" rel="noopener" data-fr="Voir sur GreenGo" data-en="View on GreenGo">GreenGo ↗</a>
-          <a href="https://www.driing.co/locations-saisonnieres/695cbb930098d67f8245e55f" target="_blank" rel="noopener" data-fr="Voir sur Driing" data-en="View on Driing">Driing ↗</a>
-          <a href="https://www.gites-de-france.com/fr/auvergne-rhone-alpes/haute-savoie/lodge-le-chamois-74g14065" target="_blank" rel="noopener" data-fr="Voir sur Gîtes de France" data-en="View on Gîtes de France">Gîtes de France ↗</a>
-        </div>
       </div>
       <form class="enquiry" onsubmit="return sendEnquiry(event)">
         <input type="hidden" name="access_key" value="56f0e445-5de2-4cd4-8617-d74534286547">
@@ -652,7 +678,16 @@ html[lang="fr"] .en-only{display:none}
         <textarea id="f-message" name="message" data-fr-ph="Dites-nous en plus sur votre séjour…" data-en-ph="Tell us more about your stay…" placeholder="Dites-nous en plus sur votre séjour…"></textarea>
         <button type="submit" class="btn btn-primary" data-fr="Envoyer la demande" data-en="Send request">Envoyer la demande</button>
         <p id="formMsg" role="status" aria-live="polite" style="margin-top:14px;font-size:14px"></p>
+        <p class="form-legal" data-fr="Vos informations servent uniquement à répondre à votre demande et à établir votre devis. Elles ne sont ni revendues ni utilisées à d'autres fins. <a href=&quot;/mentions-legales.html#donnees&quot;>Mentions légales et données personnelles</a>" data-en="Your details are only used to answer your request and prepare your quote. They are never sold or used for any other purpose. <a href=&quot;/mentions-legales.html#en&quot;>Legal notice and privacy</a>">Vos informations servent uniquement à répondre à votre demande et à établir votre devis. Elles ne sont ni revendues ni utilisées à d'autres fins. <a href="/mentions-legales.html#donnees">Mentions légales et données personnelles</a></p>
       </form>
+    </div>
+    <div class="platforms-wrap">        <p style="font-size:13.5px;color:var(--muted);margin-top:8px" data-fr="Aussi disponible sur les plateformes de réservation :" data-en="Also available on booking platforms:">Aussi disponible sur les plateformes de réservation :</p>
+        <div class="platforms">
+          <a href="https://www.airbnb.fr/rooms/1554908940653071797" target="_blank" rel="noopener" data-fr="Voir sur Airbnb" data-en="View on Airbnb">Airbnb ↗</a>
+          <a href="https://www.greengo.voyage/hote/lodge-le-chamois-les-carroz-d-araches-6-personnes-83-m2-bain-nordique-et-grande-terrasse" target="_blank" rel="noopener" data-fr="Voir sur GreenGo" data-en="View on GreenGo">GreenGo ↗</a>
+          <a href="https://www.driing.co/locations-saisonnieres/695cbb930098d67f8245e55f" target="_blank" rel="noopener" data-fr="Voir sur Driing" data-en="View on Driing">Driing ↗</a>
+          <a href="https://www.gites-de-france.com/fr/auvergne-rhone-alpes/haute-savoie/lodge-le-chamois-74g14065" target="_blank" rel="noopener" data-fr="Voir sur Gîtes de France" data-en="View on Gîtes de France">Gîtes de France ↗</a>
+        </div>
     </div>
   </div>
 </section>
@@ -686,7 +721,7 @@ html[lang="fr"] .en-only{display:none}
       </div>
     </div>
     <div class="foot-bottom">
-      © <span id="year"></span> Lodge Le Chamois · www.lodgelechamois.com — <span data-fr="Meublé de tourisme classé 4 étoiles · Tous droits réservés" data-en="4-star classified furnished rental · All rights reserved">Meublé de tourisme classé 4 étoiles · Tous droits réservés</span>
+      © <span id="year"></span> Lodge Le Chamois · www.lodgelechamois.com — <span data-fr="Meublé de tourisme classé 4 étoiles · Tous droits réservés" data-en="4-star classified furnished rental · All rights reserved">Meublé de tourisme classé 4 étoiles · Tous droits réservés</span> · <a href="/mentions-legales.html" data-fr="Mentions légales" data-en="Legal notice">Mentions légales</a>
     </div>
   </div>
 </footer>
@@ -736,6 +771,7 @@ const PHOTOS=[
    status : 'booked' (réservé) ou 'option' (en attente).
    Le calendrier démarre automatiquement au mois courant.            */
 const CAL_CONFIG={
+  updated:'2026-09-25',            // date de dernière synchro depuis l'Excel de pilotage (à mettre à jour à chaque synchro)
   monthsToShow:12,                 // nb de mois affichés à partir du mois courant
   ranges:[
     /* --- Été / automne 2026 --- */
@@ -770,6 +806,7 @@ function setLang(l){
   });
   buildGallery(currentCat);
   if(document.getElementById('calGrid').children.length) buildCalendar();
+  if(document.getElementById('calUpdated')) document.getElementById('calUpdated').textContent=fmtDate(CAL_CONFIG.updated);
 }
 function L(o){return o[document.documentElement.lang]||o.fr;}
 
@@ -845,7 +882,8 @@ function buildCalendar(){
       var st=statusForDay(dstr), cls=st?st:(dstr<today?'past':'');
       var en=document.documentElement.lang==='en';
       var lbl=st==='booked'?(en?'booked':'réservé'):st==='option'?(en?'on hold':'en option'):(dstr<today?'':(en?'available':'disponible'));
-      html+='<div class="'+cls+'">'+day+(lbl?'<span class="sr-only"> '+lbl+'</span>':'')+'</div>';
+      var pick=(!st&&dstr>=today)?' data-date="'+dstr+'" tabindex="0" role="button"':'';
+      html+='<div class="'+cls+(pick?' pick':'')+'"'+pick+'>'+day+(lbl?'<span class="sr-only"> '+lbl+'</span>':'')+'</div>';
     }
     html+='</div></div>';
     grid.insertAdjacentHTML('beforeend',html);
@@ -883,6 +921,19 @@ function sendEnquiry(e){
 window.addEventListener('scroll',function(){
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY>60);
 });
+/* calendar date picking -> prefill form */
+var pickA=null;
+function fmtDate(d){var en=document.documentElement.lang==='en';return new Date(d+'T12:00:00').toLocaleDateString(en?'en-GB':'fr-FR',{day:'numeric',month:'long',year:'numeric'});}
+function markPick(){document.querySelectorAll('.cal-days .pick').forEach(function(el){var d=el.getAttribute('data-date');el.classList.toggle('sel',d===pickA||(pickA&&document.getElementById('f-depart').value&&d>pickA&&d<=document.getElementById('f-depart').value));});}
+function onPick(d){
+  var a=document.getElementById('f-arrivee'), b=document.getElementById('f-depart');
+  if(!pickA||d<=pickA||b.value){pickA=d;a.value=d;b.value='';markPick();return;}
+  b.value=d;markPick();
+  document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+}
+document.getElementById('calGrid').addEventListener('click',function(e){var c=e.target.closest('.pick');if(c)onPick(c.getAttribute('data-date'));});
+document.getElementById('calGrid').addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('pick')){e.preventDefault();onPick(e.target.getAttribute('data-date'));}});
+document.getElementById('calUpdated').textContent=fmtDate(CAL_CONFIG.updated);
 document.getElementById('calMore').addEventListener('click',function(){
   document.getElementById('calGrid').classList.add('show-all'); this.style.display='none';
 });
