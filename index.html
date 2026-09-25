@@ -58,7 +58,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.65;font-weight:300;font-size:17px}
+body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.65;font-weight:400;font-size:17px}
 h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.15;color:var(--forest-dark)}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
@@ -85,7 +85,7 @@ header.nav.scrolled{background:rgba(246,241,231,.96);box-shadow:0 2px 20px rgba(
 .brand small{display:block;font-family:var(--sans);font-weight:500;font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;opacity:.85}
 .scrolled .brand{color:var(--forest-dark)}
 .nav-links{display:flex;align-items:center;gap:26px}
-.nav-links a{font-size:13.5px;font-weight:500;color:#fff;letter-spacing:.03em;transition:.2s}
+.nav-links a{font-size:13.5px;font-weight:500;color:#fff;letter-spacing:.03em;transition:.2s;white-space:nowrap}
 .scrolled .nav-links a{color:var(--ink)}
 .nav-links a:hover{color:var(--wood)}
 .lang-toggle{display:flex;border:1px solid rgba(255,255,255,.5);border-radius:2px;overflow:hidden}
@@ -97,8 +97,14 @@ header.nav.scrolled{background:rgba(246,241,231,.96);box-shadow:0 2px 20px rgba(
 .scrolled .menu-btn{color:var(--ink)}
 
 /* HERO */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:url('./hero.jpg') center/cover no-repeat}
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden}
+.hero-bg{position:absolute;inset:0;overflow:hidden;background:#2a2622}
+.hero-track{position:absolute;top:0;left:0;height:100%;width:300%;display:flex;animation:heroSlide 16s ease-in-out infinite}
+.hero-slide{flex:0 0 33.3334%;height:100%;background:center/cover no-repeat}
+.hero-slide.s-hiver{background-image:url('./hero.jpg')}
+.hero-slide.s-ete{background-image:url('./hero-ete.jpg')}
+@keyframes heroSlide{0%,40%{transform:translateX(0)}47%,90%{transform:translateX(-33.3334%)}97%,100%{transform:translateX(-66.6667%)}}
+@media (prefers-reduced-motion:reduce){.hero-track{animation:none}}
 .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,25,20,.45),rgba(20,25,20,.35) 40%,rgba(20,25,20,.65))}
 .hero-content{position:relative;z-index:2;padding:0 24px;max-width:860px}
 .hero .kicker{font-family:var(--sans);letter-spacing:.4em;text-transform:uppercase;font-size:13px;font-weight:500;margin-bottom:22px;opacity:.9}
@@ -258,6 +264,19 @@ footer a:hover{color:#fff}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--wood-dark);outline-offset:2px}
 
+/* design critique 25/09 */
+.brand small{white-space:nowrap}
+.hero .btn-primary{background:var(--wood-dark)}
+.hero .btn-primary:hover{background:var(--wood)}
+.hero-price{margin-top:18px;font-size:14px;letter-spacing:.06em;opacity:.95}
+.feature .ic{font-size:34px}
+.access-card .ic{font-size:30px}
+.more-wrap{margin-top:26px}
+.gallery .gal-item.more{display:none}
+.cal-grid:not(.show-all) .cal-month:nth-child(n+4){display:none}
+.m-cta{display:none}
+@media(min-width:901px) and (max-width:1120px){.nav-links{gap:16px}}
+
 /* i18n */
 [data-en]{}
 html[lang="en"] .fr-only{display:none}
@@ -267,7 +286,11 @@ html[lang="fr"] .en-only{display:none}
   .nav-links{position:fixed;top:0;right:-100%;height:100vh;width:74%;max-width:320px;background:var(--forest-dark);flex-direction:column;justify-content:center;gap:28px;transition:.35s;padding:40px}
   .nav-links.open{right:0}
   .nav-links a,.scrolled .nav-links a{color:#fff;font-size:18px}
-  .menu-btn{display:block;z-index:120}
+  .menu-btn{display:block;z-index:120;padding:9px;margin-right:-9px}
+  .lang-toggle button{padding:12px 16px;min-height:44px}
+  .m-cta{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:90;align-items:center;justify-content:space-between;gap:12px;background:var(--forest);color:#fff;padding:14px 20px;border-radius:4px;box-shadow:0 8px 30px rgba(0,0,0,.25);font-weight:600;font-size:15px;transform:translateY(140%);transition:transform .3s}
+  .m-cta small{font-weight:400;font-size:13px;opacity:.9}
+  .m-cta.on{transform:none}
   .intro-grid,.contact-wrap{grid-template-columns:1fr;gap:36px}
   .intro-badge{left:auto;right:16px}
   .features,.price-grid,.access-grid,.equip-grid,.addr-cats{grid-template-columns:1fr}
@@ -316,7 +339,7 @@ html[lang="fr"] .en-only{display:none}
 
 <!-- HERO -->
 <section class="hero" id="accueil">
-  <div class="hero-bg"></div>
+  <div class="hero-bg"><div class="hero-track" aria-hidden="true"><div class="hero-slide s-hiver"></div><div class="hero-slide s-ete"></div><div class="hero-slide s-hiver"></div></div></div>
   <div class="hero-content">
     <p class="kicker" data-fr="Location de charme · 4 étoiles" data-en="Boutique rental · 4-star">Location de charme · 4 étoiles</p>
     <h1>Lodge Le Chamois</h1>
@@ -332,6 +355,7 @@ html[lang="fr"] .en-only{display:none}
       <a href="#disponibilites" class="btn btn-primary" data-fr="Voir les disponibilités" data-en="Check availability">Voir les disponibilités</a>
       <a href="#galerie" class="btn btn-ghost" data-fr="Découvrir en photos" data-en="View the photos">Découvrir en photos</a>
     </div>
+    <p class="hero-price" data-fr="À partir de 290 € la nuit" data-en="From €290 per night">À partir de 290 € la nuit</p>
   </div>
   <a href="#appartement" class="scroll-ind" aria-label="Scroll">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
@@ -342,9 +366,9 @@ html[lang="fr"] .en-only{display:none}
 <section class="trust" aria-label="Labels et avis">
   <div class="container trust-inner">
     <ul class="trust-badges">
-      <li><b>4★</b><span data-fr="Meublé de tourisme classé" data-en="Classified holiday rental">Meublé de tourisme classé</span></li>
+      <li><b aria-label="4 étoiles">★★★★</b><span data-fr="Meublé de tourisme (4 étoiles)" data-en="Holiday rental (4 stars)">Meublé de tourisme (4 étoiles)</span></li>
       <li><b data-fr="4 épis" data-en="4 épis">4 épis</b><span>Gîtes de France</span></li>
-      <li><b data-fr="Carraz 5" data-en="Carraz 5">Carraz 5</b><span data-fr="Label Qualité Confort, niveau Standing" data-en="Les Carroz quality label, top level">Label Qualité Confort, niveau Standing</span></li>
+      <li><b data-fr="5 Carraz" data-en="5 Carraz">5 Carraz</b><span data-fr="Label Qualité Confort, niveau Standing" data-en="Les Carroz quality label, top level">Label Qualité Confort, niveau Standing</span></li>
       <li><b data-fr="4,9/5" data-en="4.9/5">4,9/5</b><span data-fr="Note Google" data-en="Google rating">Note Google</span></li>
     </ul>
     <blockquote class="trust-quote">
@@ -397,6 +421,7 @@ html[lang="fr"] .en-only{display:none}
       <button data-cat="residence" data-fr="Résidence" data-en="Residence">Résidence</button>
     </div>
     <div class="gallery" id="gallery"></div>
+    <div class="center more-wrap"><button type="button" class="btn btn-outline" id="galMore"></button></div>
   </div>
 </section>
 
@@ -414,6 +439,7 @@ html[lang="fr"] .en-only{display:none}
       <span><i class="dot option"></i> <span data-fr="Option / en attente" data-en="On hold">Option / en attente</span></span>
     </div>
     <div class="cal-grid" id="calGrid"></div>
+    <div class="center more-wrap"><button type="button" class="btn btn-outline" id="calMore" data-fr="Voir les mois suivants" data-en="Show later months">Voir les mois suivants</button></div>
     <p class="cal-note" data-fr="Calendrier mis à jour manuellement. Pour toute demande, écrivez-nous à reservation@lodgelechamois.com." data-en="Calendar updated manually. For any request, email us at reservation@lodgelechamois.com.">Calendrier mis à jour manuellement. Pour toute demande, écrivez-nous à reservation@lodgelechamois.com.</p>
     <div class="center" style="margin-top:26px"><a href="#contact" class="btn btn-primary" data-fr="Demander une réservation" data-en="Request a booking">Demander une réservation</a></div>
   </div>
@@ -443,9 +469,7 @@ html[lang="fr"] .en-only{display:none}
       </div>
       <div class="price-card">
         <h4 data-fr="Bain nordique" data-en="Nordic bath">Bain nordique</h4>
-        <p class="season" data-fr="Option, sur demande" data-en="Optional, on request">Option, sur demande</p>
-        <div class="amount" data-fr="En option" data-en="Optional">En option</div>
-        <div class="per" data-fr="chauffe sur réservation" data-en="heated on request">chauffe sur réservation</div>
+        <p class="season" data-fr="En option, sur demande" data-en="Optional, on request">En option, sur demande</p>
       </div>
     </div>
 
@@ -593,7 +617,7 @@ html[lang="fr"] .en-only{display:none}
     <div class="center" style="max-width:720px;margin-bottom:44px">
       <p class="eyebrow" data-fr="Réserver" data-en="Book">Réserver</p>
       <h2 data-fr="Envie de séjourner au Lodge ?" data-en="Ready to stay at the Lodge?">Envie de séjourner au Lodge ?</h2>
-      <p class="lead center" data-fr="Écrivez-nous vos dates : nous vous répondons rapidement avec un devis personnalisé." data-en="Send us your dates: we'll get back to you quickly with a personalised quote.">Écrivez-nous vos dates : nous vous répondons rapidement avec un devis personnalisé.</p>
+      <p class="lead center" data-fr="Donnez-nous vos dates : nous vous répondons rapidement avec un devis personnalisé." data-en="Send us your dates: we'll get back to you quickly with a personalised quote.">Donnez-nous vos dates : nous vous répondons rapidement avec un devis personnalisé.</p>
     </div>
     <div class="contact-wrap">
       <div class="contact-info">
@@ -632,6 +656,8 @@ html[lang="fr"] .en-only{display:none}
     </div>
   </div>
 </section>
+
+<a href="#contact" class="m-cta" id="mCta"><span data-fr="Demander mes dates" data-en="Request my dates">Demander mes dates</span><small data-fr="dès 290 € la nuit" data-en="from €290 per night">dès 290 € la nuit</small></a>
 
 <!-- FOOTER -->
 <footer>
@@ -759,7 +785,14 @@ function buildGallery(cat){
     d.onclick=function(){openLb(p.f);};
     g.appendChild(d);
   });
+  var items=g.children, n=items.length, collapse=(cat==='all'&&!galAll&&n>GAL_PREVIEW);
+  for(var i=GAL_PREVIEW;i<n;i++) items[i].classList.toggle('more',collapse);
+  var b=document.getElementById('galMore');
+  b.style.display=collapse?'':'none';
+  b.textContent=document.documentElement.lang==='en'?'See all '+n+' photos':'Voir les '+n+' photos';
 }
+var GAL_PREVIEW=9, galAll=false;
+document.getElementById('galMore').addEventListener('click',function(){galAll=true;buildGallery(currentCat);});
 document.getElementById('galFilters').addEventListener('click',function(e){
   if(e.target.tagName!=='BUTTON')return;
   document.querySelectorAll('#galFilters button').forEach(function(b){b.classList.remove('active');});
@@ -850,6 +883,18 @@ function sendEnquiry(e){
 window.addEventListener('scroll',function(){
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY>60);
 });
+document.getElementById('calMore').addEventListener('click',function(){
+  document.getElementById('calGrid').classList.add('show-all'); this.style.display='none';
+});
+/* ============ MOBILE BOOKING BAR ============ */
+(function(){
+  var bar=document.getElementById('mCta'), hero=document.getElementById('accueil'), ct=document.getElementById('contact');
+  function upd(){
+    var show=window.scrollY>hero.offsetHeight*0.8 && ct.getBoundingClientRect().top>window.innerHeight*0.9;
+    bar.classList.toggle('on',show);
+  }
+  window.addEventListener('scroll',upd,{passive:true}); upd();
+})();
 document.getElementById('menuBtn').addEventListener('click',function(){
   var o=document.getElementById('navLinks').classList.toggle('open');
   this.setAttribute('aria-expanded',o?'true':'false');
