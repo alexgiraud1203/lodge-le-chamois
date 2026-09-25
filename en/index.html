@@ -319,6 +319,8 @@ main:focus{outline:none}
 .contact-info a{overflow-wrap:anywhere}
 @media(max-width:560px){.price-table th,.price-table td{padding:12px 14px;font-size:14px}.price-table td:last-child{white-space:normal}}
 
+.cal-status{text-align:center;font-size:14.5px;font-weight:600;color:var(--forest-dark);min-height:1.4em;margin-top:10px}
+
 /* i18n */
 [data-en]{}
 html[lang="en"] .fr-only{display:none}
@@ -396,7 +398,7 @@ html[lang="fr"] .en-only{display:none}
 </div>
 <div class="hero-cta">
 <a class="btn btn-primary" data-en="Check availability" data-fr="Voir les disponibilités" href="#disponibilites">Check availability</a>
-<a class="btn btn-ghost" data-en="View the photos" data-fr="Découvrir en photos" href="#galerie">View the photos</a>
+<a class="btn btn-ghost" data-en="See the photos" data-fr="Voir les photos" href="#galerie">See the photos</a>
 </div>
 <p class="hero-price" data-en="From €290 per night" data-fr="À partir de 290 € la nuit">From €290 per night</p>
 </div>
@@ -470,18 +472,19 @@ html[lang="fr"] .en-only{display:none}
 <div class="center" style="max-width:720px">
 <p class="eyebrow" data-en="Calendar" data-fr="Calendrier">Calendar</p>
 <h2 data-en="Availability" data-fr="Disponibilités">Availability</h2>
-<p class="lead center" data-en="Check the open periods, then contact us to book your dates." data-fr="Consultez les périodes libres puis contactez-nous pour réserver vos dates.">Check the open periods, then contact us to book your dates.</p>
+<p class="lead center" data-en="Pick your dates and we'll confirm availability and price within 24 hours." data-fr="Choisissez vos dates : nous vous confirmons la disponibilité et le tarif sous 24 h.">Pick your dates and we'll confirm availability and price within 24 hours.</p>
 </div>
 <div class="cal-legend">
 <span><i class="dot free"></i> <span data-en="Available" data-fr="Disponible">Available</span></span>
 <span><i class="dot booked"></i> <span data-en="Booked" data-fr="Réservé">Booked</span></span>
-<span><i class="dot option"></i> <span data-en="On hold" data-fr="Option / en attente">On hold</span></span>
+<span><i class="dot option"></i> <span data-en="On hold" data-fr="Option en cours">On hold</span></span>
 </div>
 <div class="cal-grid" id="calGrid"></div>
 <div class="center more-wrap"><button class="btn btn-outline" data-en="Show later months" data-fr="Voir les mois suivants" id="calMore" type="button">Show later months</button></div>
-<p class="cal-hint" data-en="Tip: click your arrival date, then your departure date, to prefill your request." data-fr="Astuce : cliquez sur votre date d'arrivée puis sur votre date de départ pour préremplir la demande.">Tip: click your arrival date, then your departure date, to prefill your request.</p>
+<p class="cal-hint" data-en="Click your check-in date, then your check-out date: they're added to your request." data-fr="Cliquez sur votre arrivée, puis sur votre départ : les dates s'ajoutent à votre demande.">Click your check-in date, then your check-out date: they're added to your request.</p>
+<p aria-live="polite" class="cal-status" id="calStatus" role="status"></p>
 <p class="cal-note"><span data-en="Calendar updated on" data-fr="Calendrier mis à jour le">Calendar updated on</span> <span id="calUpdated"></span>. <span data-en="Any question: reservation@lodgelechamois.com." data-fr="Pour toute question : reservation@lodgelechamois.com.">Any question: reservation@lodgelechamois.com.</span></p>
-<div class="center" style="margin-top:26px"><a class="btn btn-primary" data-en="Request a booking" data-fr="Demander une réservation" href="#contact">Request a booking</a></div>
+<div class="center" style="margin-top:26px"><a class="btn btn-primary" data-en="Book these dates" data-fr="Réserver ces dates" href="#contact">Book these dates</a></div>
 </div>
 </section>
 <!-- PRICING -->
@@ -678,22 +681,22 @@ html[lang="fr"] .en-only{display:none}
 <input autocomplete="off" name="botcheck" style="display:none" tabindex="-1" type="checkbox"/>
 <div class="row">
 <div><label data-en="Name (required)" data-fr="Nom (obligatoire)" for="f-nom">Name (required)</label><input autocomplete="name" id="f-nom" name="nom" required="" type="text"/></div>
-<div><label data-en="Email (required)" data-fr="Email (obligatoire)" for="f-email">Email (required)</label><input autocomplete="email" id="f-email" name="email" required="" type="email"/></div>
+<div><label data-en="Email (required)" data-fr="E-mail (obligatoire)" for="f-email">Email (required)</label><input autocomplete="email" id="f-email" name="email" required="" type="email"/></div>
 </div>
 <div class="row">
-<div><label data-en="Arrival" data-fr="Arrivée" for="f-arrivee">Arrival</label><input id="f-arrivee" name="arrivee" type="date"/></div>
-<div><label data-en="Departure" data-fr="Départ" for="f-depart">Departure</label><input id="f-depart" name="depart" type="date"/></div>
+<div><label data-en="Check-in" data-fr="Arrivée" for="f-arrivee">Check-in</label><input id="f-arrivee" name="arrivee" type="date"/></div>
+<div><label data-en="Check-out" data-fr="Départ" for="f-depart">Check-out</label><input id="f-depart" name="depart" type="date"/></div>
 </div>
 <label data-en="Number of guests" data-fr="Nombre de personnes" for="f-personnes">Number of guests</label>
 <select id="f-personnes" name="personnes"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option selected="">6</option></select>
 <label data-en="Your message" data-fr="Votre message" for="f-message">Your message</label>
-<textarea data-en-ph="Tell us more about your stay…" data-fr-ph="Dites-nous en plus sur votre séjour…" id="f-message" name="message" placeholder="Tell us more about your stay…"></textarea>
-<button class="btn btn-primary" data-en="Send request" data-fr="Envoyer la demande" type="submit">Send request</button>
+<textarea data-en-ph="Children, pets, Nordic bath, late arrival… tell us what matters to you." data-fr-ph="Enfants, animal, bain nordique, arrivée tardive… dites-nous ce qui compte pour vous." id="f-message" name="message" placeholder="Children, pets, Nordic bath, late arrival… tell us what matters to you."></textarea>
+<button class="btn btn-primary" data-en="Book my stay" data-fr="Réserver mon séjour" type="submit">Book my stay</button>
 <p aria-live="polite" id="formMsg" role="status" style="margin-top:14px;font-size:14px"></p>
 <p class="form-legal" data-en='Your details are only used to answer your request and prepare your quote. They are never sold or used for any other purpose. &lt;a href="/mentions-legales.html#en"&gt;Legal notice and privacy&lt;/a&gt;' data-fr="Vos informations servent uniquement à répondre à votre demande et à établir votre devis. Elles ne sont ni revendues ni utilisées à d'autres fins. &lt;a href=&quot;/mentions-legales.html#en&quot;&gt;Mentions légales et données personnelles&lt;/a&gt;">Your details are only used to answer your request and prepare your quote. They are never sold or used for any other purpose. <a href="/mentions-legales.html#en">Legal notice and privacy</a></p>
 </form>
 </div>
-<div class="platforms-wrap"> <p data-en="Also available on booking platforms:" data-fr="Aussi disponible sur les plateformes de réservation :" style="font-size:13.5px;color:var(--muted);margin-top:8px">Also available on booking platforms:</p>
+<div class="platforms-wrap"> <p data-en="Prefer a booking platform? You'll find the Lodge there too:" data-fr="Vous préférez passer par une plateforme ? Le Lodge y est aussi :" style="font-size:13.5px;color:var(--muted);margin-top:8px">Prefer a booking platform? You'll find the Lodge there too:</p>
 <div class="platforms">
 <a data-en="View on Airbnb" data-fr="Voir sur Airbnb" href="https://www.airbnb.fr/rooms/1554908940653071797" rel="noopener" target="_blank">View on Airbnb</a>
 <a data-en="View on GreenGo" data-fr="Voir sur GreenGo" href="https://www.greengo.voyage/hote/lodge-le-chamois-les-carroz-d-araches-6-personnes-83-m2-bain-nordique-et-grande-terrasse" rel="noopener" target="_blank">View on GreenGo</a>
@@ -703,7 +706,7 @@ html[lang="fr"] .en-only{display:none}
 </div>
 </div>
 </section>
-<a class="m-cta" href="#contact" id="mCta"><span data-en="Request my dates" data-fr="Demander mes dates">Request my dates</span><small data-en="from €290 per night" data-fr="dès 290 € la nuit">from €290 per night</small></a>
+<a class="m-cta" href="#contact" id="mCta"><span data-en="Book my stay" data-fr="Réserver mon séjour">Book my stay</span><small data-en="from €290 a night" data-fr="dès 290 € la nuit">from €290 a night</small></a>
 </main>
 <!-- FOOTER -->
 <footer>
@@ -914,24 +917,24 @@ function sendEnquiry(e){
   e.preventDefault();
   var f=e.target, fr=document.documentElement.lang==='fr';
   var btn=f.querySelector('button[type=submit]'), msg=document.getElementById('formMsg');
-  btn.disabled=true; btn.textContent=fr?'Envoi…':'Sending…';
+  btn.disabled=true; btn.textContent=fr?'Envoi en cours…':'Sending…';
   fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(f)})
     .then(function(r){return r.json();})
     .then(function(j){
       if(j.success){
         f.reset(); btn.style.display='none';
         msg.style.color='var(--forest)';
-        msg.textContent=fr?'Merci ! Votre demande a bien été envoyée. Nous vous répondons rapidement.':'Thank you! Your request has been sent. We will get back to you shortly.';
+        msg.textContent=fr?'Merci, votre demande de réservation est bien partie. Nous vous confirmons la disponibilité et le tarif par e-mail sous 24 h. Pensez à regarder dans vos courriers indésirables.':'Thank you, your booking request is on its way. We\'ll confirm availability and price by email within 24 hours. Please check your spam folder too.';
       }else{
         msg.style.color='#b00020';
-        msg.textContent=fr?'Une erreur est survenue. Réessayez ou écrivez-nous à reservation@lodgelechamois.com.':'Something went wrong. Please try again or email reservation@lodgelechamois.com.';
-        btn.disabled=false; btn.textContent=fr?'Envoyer la demande':'Send request';
+        msg.textContent=fr?'Votre demande n\'a pas pu partir. Réessayez dans un instant, ou écrivez-nous à reservation@lodgelechamois.com en indiquant vos dates.':'Your request couldn\'t be sent. Please try again in a moment, or email reservation@lodgelechamois.com with your dates.';
+        btn.disabled=false; btn.textContent=fr?'Réserver mon séjour':'Book my stay';
       }
     })
     .catch(function(){
       msg.style.color='#b00020';
-      msg.textContent=fr?'Erreur réseau. Écrivez-nous à reservation@lodgelechamois.com.':'Network error. Please email reservation@lodgelechamois.com.';
-      btn.disabled=false; btn.textContent=fr?'Envoyer la demande':'Send request';
+      msg.textContent=fr?'Pas de connexion internet. Vérifiez votre connexion puis réessayez, ou écrivez-nous à reservation@lodgelechamois.com.':'No internet connection. Check your connection and try again, or email reservation@lodgelechamois.com.';
+      btn.disabled=false; btn.textContent=fr?'Réserver mon séjour':'Book my stay';
     });
   return false;
 }
@@ -946,8 +949,11 @@ function fmtDate(d){var en=document.documentElement.lang==='en';return new Date(
 function markPick(){document.querySelectorAll('.cal-days .pick').forEach(function(el){var d=el.getAttribute('data-date');el.classList.toggle('sel',d===pickA||(pickA&&document.getElementById('f-depart').value&&d>pickA&&d<=document.getElementById('f-depart').value));});}
 function onPick(d){
   var a=document.getElementById('f-arrivee'), b=document.getElementById('f-depart');
-  if(!pickA||d<=pickA||b.value){pickA=d;a.value=d;b.value='';markPick();return;}
+  var st=document.getElementById('calStatus'), en=document.documentElement.lang==='en';
+  if(!pickA||d<=pickA||b.value){pickA=d;a.value=d;b.value='';markPick();
+    st.textContent=en?'Check-in on '+fmtDate(d)+'. Now choose your check-out date.':'Arrivée le '+fmtDate(d)+'. Choisissez maintenant votre départ.';return;}
   b.value=d;markPick();
+  st.textContent=en?'From '+fmtDate(pickA)+' to '+fmtDate(d)+': dates added to your request.':'Du '+fmtDate(pickA)+' au '+fmtDate(d)+' : dates ajoutées à votre demande.';
   document.getElementById('contact').scrollIntoView({behavior:'smooth'});
 }
 document.getElementById('calGrid').addEventListener('click',function(e){var c=e.target.closest('.pick');if(c)onPick(c.getAttribute('data-date'));});
