@@ -314,6 +314,11 @@ main:focus{outline:none}
 .hero-pause.paused .i-play{display:inline;fill:#fff}
 @media (prefers-reduced-motion:reduce){.hero-pause{display:none}}
 
+/* reflow 320px */
+.contact-wrap>*{min-width:0}
+.contact-info a{overflow-wrap:anywhere}
+@media(max-width:560px){.price-table th,.price-table td{padding:12px 14px;font-size:14px}.price-table td:last-child{white-space:normal}}
+
 /* i18n */
 [data-en]{}
 html[lang="en"] .fr-only{display:none}
