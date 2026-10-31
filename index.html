@@ -697,11 +697,13 @@ html[lang="fr"] .en-only{display:none}
           <div><label for="f-email" data-fr="E-mail (obligatoire)" data-en="Email (required)">E-mail (obligatoire)</label><input id="f-email" type="email" name="email" autocomplete="email" required></div>
         </div>
         <div class="row">
+          <div><label for="f-telephone" data-fr="Téléphone (obligatoire)" data-en="Phone (required)">Téléphone (obligatoire)</label><input id="f-telephone" type="tel" name="telephone" autocomplete="tel" inputmode="tel" data-fr-ph="+33 6 12 34 56 78" data-en-ph="+44 7123 456789" placeholder="+33 6 12 34 56 78" required></div>
+          <div><label for="f-personnes" data-fr="Nombre de personnes" data-en="Number of guests">Nombre de personnes</label><select id="f-personnes" name="personnes"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option></select></div>
+        </div>
+        <div class="row">
           <div><label for="f-arrivee" data-fr="Arrivée" data-en="Check-in">Arrivée</label><input id="f-arrivee" type="date" name="arrivee"></div>
           <div><label for="f-depart" data-fr="Départ" data-en="Check-out">Départ</label><input id="f-depart" type="date" name="depart"></div>
         </div>
-        <label for="f-personnes" data-fr="Nombre de personnes" data-en="Number of guests">Nombre de personnes</label>
-        <select id="f-personnes" name="personnes"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option></select>
         <label for="f-message" data-fr="Votre message" data-en="Your message">Votre message</label>
         <textarea id="f-message" name="message" data-fr-ph="Enfants, animal, bain nordique, arrivée tardive… dites-nous ce qui compte pour vous." data-en-ph="Children, pets, Nordic bath, late arrival… tell us what matters to you." placeholder="Enfants, animal, bain nordique, arrivée tardive… dites-nous ce qui compte pour vous."></textarea>
         <button type="submit" class="btn btn-primary" data-fr="Réserver mon séjour" data-en="Book my stay">Réserver mon séjour</button>
