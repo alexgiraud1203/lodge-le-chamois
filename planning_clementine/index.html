@@ -274,7 +274,7 @@ function renderMes(){
   if(!myApt){
     view.innerHTML=`<div class="panel"><h2>Accès propriétaire</h2>
      <label for="p-apt">Votre appartement<select id="p-apt">${Object.keys(APTS).map(a=>`<option value="${a}">${a} · ${esc(APTS[a].owner)}</option>`).join("")}</select></label>
-     <label for="p-pin">Votre code<input id="p-pin" autocapitalize="characters" autocomplete="off"></label>
+     <label for="p-pin">Votre code<input id="p-pin" autocapitalize="characters" autocomplete="off" placeholder="xxxx"></label>
      <button class="btn primary" id="p-go">Voir mes séjours</button></div>`;
     $("#p-go").onclick=()=>{const a=$("#p-apt").value,c=$("#p-pin").value.trim();busy(true);
       google.script.run.withSuccessHandler(r=>{busy(false);if(!r.ok){toast("Code incorrect");return}myApt=a;myCode=c;isAdmin=r.admin;try{localStorage.setItem("pc-apt",a)}catch(e){}renderMes()}).withFailureHandler(fail).login(a,c)};
