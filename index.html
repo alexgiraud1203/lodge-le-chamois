@@ -290,6 +290,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .cal-days .pick{cursor:pointer}
 .cal-days .pick:hover{background:var(--cream-2)}
 .cal-days .pick.sel{background:var(--forest);color:#fff}
+.cal-days > div{position:relative}
+.cal-days .zb{position:absolute;left:3px;right:3px;bottom:2px;display:flex;gap:1px;height:3px}
+.cal-days .zb i{flex:1;border-radius:1px}
+.zA{background:#3b7dd8}.zB{background:#e0a020}.zC{background:#c0392b}
+.cal-days .ferie{font-weight:700;text-decoration:underline;text-decoration-color:var(--wood);text-underline-offset:3px}
+.cal-legend .zl{display:inline-flex;align-items:center;gap:5px}.cal-legend .zl i{display:inline-block;width:14px;height:4px;border-radius:1px}
 @media (hover:hover){.cal-days .pick[data-tip]{position:relative}.cal-days .pick[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--forest-dark);color:#fff;font-size:12px;line-height:1.35;padding:6px 10px;border-radius:3px;white-space:nowrap;z-index:20;pointer-events:none;box-shadow:0 4px 14px rgba(0,0,0,.18)}}
 .form-legal{margin-top:12px;font-size:12.5px;color:var(--muted);line-height:1.5}
 .form-legal a{color:var(--wood-dark);text-decoration:underline}
@@ -485,6 +491,8 @@ html[lang="fr"] .en-only{display:none}
       <span><i class="dot free"></i> <span data-fr="Disponible" data-en="Available">Disponible</span></span>
       <span><i class="dot booked"></i> <span data-fr="Réservé" data-en="Booked">Réservé</span></span>
       <span><i class="dot option"></i> <span data-fr="Option en cours" data-en="On hold">Option en cours</span></span>
+      <span class="zl"><i class="zA"></i><i class="zB"></i><i class="zC"></i> <span data-fr="Vacances scolaires zones A, B, C" data-en="French school holidays, zones A, B, C">Vacances scolaires zones A, B, C</span></span>
+      <span><b style="text-decoration:underline;text-decoration-color:var(--wood);text-underline-offset:3px">14</b> <span data-fr="Jour férié" data-en="Public holiday">Jour férié</span></span>
     </div>
     <div class="cal-grid" id="calGrid"></div>
     <div class="center more-wrap"><button type="button" class="btn btn-outline" id="calMore" data-fr="Voir les mois suivants" data-en="Show later months">Voir les mois suivants</button></div>
@@ -820,6 +828,36 @@ const CAL_CONFIG={
     {start:'2027-07-09', end:'2027-07-12', status:'booked'}  // Booking.com 6699630249 + blocage 10-12/07
   ]
 };
+/* HOLIDAYS:START (source : service-public.gouv.fr, calendrier scolaire 2026-2027 et 2027-2028 ; fin = jour de reprise, exclu) */
+const SCHOOL_HOLIDAYS=[
+  {zones:'ABC',start:'2026-10-17',end:'2026-11-02',fr:'Toussaint',en:'Autumn half-term'},
+  {zones:'ABC',start:'2026-12-19',end:'2027-01-04',fr:'Noël',en:'Christmas'},
+  {zones:'C',start:'2027-02-06',end:'2027-02-22',fr:'Hiver',en:'Winter'},
+  {zones:'A',start:'2027-02-13',end:'2027-03-01',fr:'Hiver',en:'Winter'},
+  {zones:'B',start:'2027-02-20',end:'2027-03-08',fr:'Hiver',en:'Winter'},
+  {zones:'C',start:'2027-04-03',end:'2027-04-19',fr:'Printemps',en:'Spring'},
+  {zones:'A',start:'2027-04-10',end:'2027-04-26',fr:'Printemps',en:'Spring'},
+  {zones:'B',start:'2027-04-17',end:'2027-05-03',fr:'Printemps',en:'Spring'},
+  {zones:'ABC',start:'2027-07-03',end:'2027-09-02',fr:'Été',en:'Summer'},
+  {zones:'ABC',start:'2027-10-23',end:'2027-11-08',fr:'Toussaint',en:'Autumn half-term'},
+  {zones:'ABC',start:'2027-12-18',end:'2028-01-03',fr:'Noël',en:'Christmas'},
+  {zones:'B',start:'2028-02-05',end:'2028-02-21',fr:'Hiver',en:'Winter'},
+  {zones:'C',start:'2028-02-12',end:'2028-02-28',fr:'Hiver',en:'Winter'},
+  {zones:'A',start:'2028-02-19',end:'2028-03-06',fr:'Hiver',en:'Winter'},
+  {zones:'B',start:'2028-04-08',end:'2028-04-24',fr:'Printemps',en:'Spring'},
+  {zones:'C',start:'2028-04-15',end:'2028-05-02',fr:'Printemps',en:'Spring'},
+  {zones:'A',start:'2028-04-22',end:'2028-05-09',fr:'Printemps',en:'Spring'}
+];
+const PUBLIC_HOLIDAYS={
+  '2026-12-25':['Noël','Christmas Day'],'2027-01-01':['Jour de l\'an','New Year\'s Day'],
+  '2027-03-29':['Lundi de Pâques','Easter Monday'],'2027-05-01':['Fête du travail','Labour Day'],
+  '2027-05-06':['Ascension','Ascension Day'],'2027-05-08':['Victoire 1945','VE Day'],
+  '2027-05-17':['Lundi de Pentecôte','Whit Monday'],'2027-07-14':['Fête nationale','Bastille Day'],
+  '2027-08-15':['Assomption','Assumption Day'],'2027-11-01':['Toussaint','All Saints\' Day'],
+  '2027-11-11':['Armistice','Armistice Day'],'2027-12-25':['Noël','Christmas Day'],
+  '2028-01-01':['Jour de l\'an','New Year\'s Day']
+};
+/* HOLIDAYS:END */
 /* PRICES:START (généré par _outils/generer_tarifs_site.py, ne pas modifier à la main) */
 const PRICE_CONFIG=[{"start":"2026-11-15","end":"2026-12-05","mode":"night","price":290,"min":3},
   {"start":"2026-12-05","end":"2026-12-12","mode":"week","price":2390,"night":393,"min":7},
@@ -954,6 +992,8 @@ function priceTip(p){
   if(p.mode==='night')return en?eur(p.price)+' / night · '+p.min+' nights minimum':eur(p.price)+' / nuit · '+p.min+' nuits minimum';
   return en?eur(p.price)+' / week · '+p.min+' nights minimum':eur(p.price)+' la semaine · '+p.min+' nuits minimum';
 }
+function schoolZones(dstr){var z='',n='';for(var i=0;i<SCHOOL_HOLIDAYS.length;i++){var h=SCHOOL_HOLIDAYS[i];if(dstr>=h.start&&dstr<h.end){z+=h.zones;n=document.documentElement.lang==='en'?h.en:h.fr;}}z=['A','B','C'].filter(function(x){return z.indexOf(x)>=0;}).join('');return {z:z,n:n};}
+function dayExtras(dstr){var en=document.documentElement.lang==='en',s=schoolZones(dstr),f=PUBLIC_HOLIDAYS[dstr],parts=[];if(f)parts.push((en?'Public holiday: ':'Férié : ')+(en?f[1]:f[0]));if(s.z)parts.push((en?'School holidays':'Vacances scolaires')+' '+s.n.toLowerCase()+(s.z.length===3?(en?', all zones':', toutes zones'):(' '+(en?'zone':'zone')+(s.z.length>1?'s ':' ')+s.z.split('').join(', '))));return {zones:s.z,ferie:!!f,text:parts.join(' · ')};}
 function buildCalendar(){
   var grid=document.getElementById('calGrid'); grid.innerHTML='';
   var monthsFR=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
@@ -975,9 +1015,13 @@ function buildCalendar(){
       var en=document.documentElement.lang==='en';
       var lbl=st==='booked'?(en?'booked':'réservé'):st==='option'?(en?'on hold':'en option'):(dstr<today?'':(en?'available':'disponible'));
       var pick=(!st&&dstr>=today)?' data-date="'+dstr+'"':'';
+      var ex=dayExtras(dstr);
       var tip=pick?priceTip(priceForDay(dstr)):'';
+      if(ex.text&&dstr>=today)tip=tip?tip+' · '+ex.text:ex.text;
       if(tip)pick+=' data-tip="'+tip+'" title="'+tip+'"';
-      html+='<div class="'+cls+(pick?' pick':'')+'"'+pick+'>'+day+(lbl?'<span class="sr-only"> '+lbl+'</span>':'')+'</div>';
+      var bar=ex.zones?'<span class="zb" aria-hidden="true">'+ex.zones.split('').map(function(z){return '<i class="z'+z+'"></i>';}).join('')+'</span>':'';
+      if(ex.ferie)cls+=' ferie';
+      html+='<div class="'+cls+(pick?' pick':'')+'"'+pick+'>'+day+bar+(lbl?'<span class="sr-only"> '+lbl+'</span>':'')+'</div>';
     }
     html+='</div></div>';
     grid.insertAdjacentHTML('beforeend',html);
@@ -1023,7 +1067,7 @@ function onPick(d){
   var a=document.getElementById('f-arrivee'), b=document.getElementById('f-depart');
   var st=document.getElementById('calStatus'), en=document.documentElement.lang==='en';
   if(!pickA||d<=pickA||b.value){pickA=d;a.value=d;b.value='';markPick();
-    var tp=priceTip(priceForDay(d));
+    var tp=priceTip(priceForDay(d)),tx=dayExtras(d).text;if(tx)tp=tp?tp+' · '+tx:tx;
     st.textContent=(en?'Check-in on '+fmtDate(d)+'. Now choose your check-out date.':'Arrivée le '+fmtDate(d)+'. Choisissez maintenant votre départ.')+(tp?' ('+tp+')':'');return;}
   b.value=d;markPick();
   st.textContent=en?'From '+fmtDate(pickA)+' to '+fmtDate(d)+': dates added to your request.':'Du '+fmtDate(pickA)+' au '+fmtDate(d)+' : dates ajoutées à votre demande.';
