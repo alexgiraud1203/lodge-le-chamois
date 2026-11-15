@@ -801,17 +801,9 @@ const PHOTOS=[
    status : 'booked' (réservé) ou 'option' (en attente).
    Le calendrier démarre automatiquement au mois courant.            */
 const CAL_CONFIG={
-  updated:'2026-09-29',            // date de dernière synchro depuis l'Excel de pilotage (à mettre à jour à chaque synchro)
+  updated:'2026-11-15',            // date de dernière synchro depuis l'Excel de pilotage (à mettre à jour à chaque synchro)
   monthsToShow:12,                 // nb de mois affichés à partir du mois courant
   ranges:[
-    /* --- Été / automne 2026 --- */
-    {start:'2026-07-04', end:'2026-07-11', status:'booked'},
-    {start:'2026-07-13', end:'2026-07-25', status:'booked'},
-    {start:'2026-07-25', end:'2026-08-01', status:'booked'},
-    {start:'2026-08-01', end:'2026-08-08', status:'booked'},
-    {start:'2026-08-16', end:'2026-08-23', status:'booked'},
-    /* --- Fermeture automne 2026 (demande Alexandre 25/09) --- */
-    {start:'2026-10-31', end:'2026-11-06', status:'booked'},
     /* --- Hiver 2026-2027 --- */
     {start:'2026-12-18', end:'2026-12-23', status:'booked'},
     {start:'2026-12-23', end:'2027-01-02', status:'booked'},
@@ -821,7 +813,9 @@ const CAL_CONFIG={
     {start:'2027-02-06', end:'2027-02-13', status:'booked'},
     {start:'2027-02-13', end:'2027-02-20', status:'booked'},
     {start:'2027-02-20', end:'2027-02-27', status:'booked'},
-    {start:'2027-02-27', end:'2027-03-06', status:'booked'}
+    {start:'2027-02-27', end:'2027-03-06', status:'booked'},
+    /* --- Été 2027 --- */
+    {start:'2027-07-09', end:'2027-07-11', status:'booked'}  // Booking.com 6699630249
   ]
 };
 
