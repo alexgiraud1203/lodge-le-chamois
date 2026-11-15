@@ -291,6 +291,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .cal-days .pick{cursor:pointer}
 .cal-days .pick:hover{background:var(--cream-2)}
 .cal-days .pick.sel{background:var(--forest);color:#fff}
+@media (hover:hover){.cal-days .pick[data-tip]{position:relative}.cal-days .pick[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--forest-dark);color:#fff;font-size:12px;line-height:1.35;padding:6px 10px;border-radius:3px;white-space:nowrap;z-index:20;pointer-events:none;box-shadow:0 4px 14px rgba(0,0,0,.18)}}
 .form-legal{margin-top:12px;font-size:12.5px;color:var(--muted);line-height:1.5}
 .form-legal a{color:var(--wood-dark);text-decoration:underline}
 .platforms-wrap{margin-top:34px;text-align:center}
@@ -483,6 +484,7 @@ html[lang="fr"] .en-only{display:none}
 <div class="center more-wrap"><button class="btn btn-outline" data-en="Show later months" data-fr="Voir les mois suivants" id="calMore" type="button">Show later months</button></div>
 <p class="cal-hint" data-en="Click your check-in date, then your check-out date: they're added to your request." data-fr="Cliquez sur votre arrivée, puis sur votre départ : les dates s'ajoutent à votre demande.">Click your check-in date, then your check-out date: they're added to your request.</p>
 <p aria-live="polite" class="cal-status" id="calStatus" role="status"></p>
+<p class="cal-note" data-en="Hover over or tap a free date to see the price. Indicative direct-booking prices, excluding tourist tax, confirmed in your quote within 24 hours." data-fr="Survolez ou touchez une date libre pour voir le prix. Prix indicatifs en réservation directe, hors taxe de séjour, confirmés dans votre devis sous 24 h.">Hover over or tap a free date to see the price. Indicative direct-booking prices, excluding tourist tax, confirmed in your quote within 24 hours.</p>
 <p class="cal-note"><span data-en="Calendar updated on" data-fr="Calendrier mis à jour le">Calendar updated on</span> <span id="calUpdated"></span>. <span data-en="Any question: reservation@lodgelechamois.com." data-fr="Pour toute question : reservation@lodgelechamois.com.">Any question: reservation@lodgelechamois.com.</span></p>
 <div class="center" style="margin-top:26px"><a class="btn btn-primary" data-en="Book these dates" data-fr="Réserver ces dates" href="#contact">Book these dates</a></div>
 </div>
@@ -802,6 +804,47 @@ const CAL_CONFIG={
     {start:'2027-07-09', end:'2027-07-12', status:'booked'}  // Booking.com 6699630249 + blocage 10-12/07
   ]
 };
+/* PRICES:START (généré par _outils/generer_tarifs_site.py, ne pas modifier à la main) */
+const PRICE_CONFIG=[{"start":"2026-12-05","end":"2026-12-12","mode":"week","price":2390,"night":393,"min":7},
+  {"start":"2026-12-12","end":"2026-12-16","mode":"week","price":2650,"night":435,"min":7},
+  {"start":"2026-12-16","end":"2026-12-23","mode":"week","price":3490,"night":573,"min":7},
+  {"start":"2026-12-23","end":"2027-01-02","mode":"week","price":3490,"night":573,"min":7},
+  {"start":"2027-01-02","end":"2027-01-09","mode":"week","price":2650,"night":435,"min":7},
+  {"start":"2027-01-09","end":"2027-01-16","mode":"week","price":2990,"night":491,"min":7},
+  {"start":"2027-01-16","end":"2027-01-23","mode":"week","price":2990,"night":491,"min":7},
+  {"start":"2027-01-23","end":"2027-01-30","mode":"week","price":2990,"night":491,"min":7},
+  {"start":"2027-01-30","end":"2027-02-06","mode":"week","price":3290,"night":540,"min":7},
+  {"start":"2027-02-06","end":"2027-02-13","mode":"week","price":3490,"night":573,"min":7},
+  {"start":"2027-02-13","end":"2027-02-20","mode":"week","price":3490,"night":573,"min":7},
+  {"start":"2027-02-20","end":"2027-02-27","mode":"week","price":3290,"night":540,"min":7},
+  {"start":"2027-02-27","end":"2027-03-06","mode":"week","price":3290,"night":540,"min":7},
+  {"start":"2027-03-06","end":"2027-03-13","mode":"week","price":2650,"night":435,"min":7},
+  {"start":"2027-03-13","end":"2027-03-20","mode":"week","price":2390,"night":393,"min":7},
+  {"start":"2027-03-20","end":"2027-03-27","mode":"week","price":2390,"night":393,"min":7},
+  {"start":"2027-03-27","end":"2027-04-03","mode":"week","price":2390,"night":393,"min":7},
+  {"start":"2027-04-03","end":"2027-04-11","mode":"week","price":2990,"night":491,"min":7},
+  {"start":"2027-04-11","end":"2027-05-06","mode":"night","price":290,"min":3},
+  {"start":"2027-05-06","end":"2027-05-10","mode":"night","price":390,"min":3},
+  {"start":"2027-05-10","end":"2027-05-14","mode":"night","price":290,"min":3},
+  {"start":"2027-05-14","end":"2027-05-18","mode":"night","price":350,"min":3},
+  {"start":"2027-05-18","end":"2027-06-01","mode":"night","price":290,"min":3},
+  {"start":"2027-06-01","end":"2027-06-26","mode":"night","price":360,"min":3},
+  {"start":"2027-06-26","end":"2027-07-03","mode":"week","price":1750,"night":288,"min":6},
+  {"start":"2027-07-03","end":"2027-07-10","mode":"week","price":1750,"night":288,"min":6},
+  {"start":"2027-07-10","end":"2027-07-17","mode":"week","price":1750,"night":288,"min":6},
+  {"start":"2027-07-17","end":"2027-07-24","mode":"week","price":1950,"night":320,"min":6},
+  {"start":"2027-07-24","end":"2027-07-31","mode":"week","price":1950,"night":320,"min":6},
+  {"start":"2027-07-31","end":"2027-08-07","mode":"week","price":2250,"night":370,"min":6},
+  {"start":"2027-08-07","end":"2027-08-14","mode":"week","price":2250,"night":370,"min":6},
+  {"start":"2027-08-14","end":"2027-08-21","mode":"week","price":2250,"night":370,"min":6},
+  {"start":"2027-08-21","end":"2027-08-28","mode":"week","price":2250,"night":370,"min":6},
+  {"start":"2027-08-28","end":"2027-09-04","mode":"week","price":2250,"night":370,"min":6},
+  {"start":"2027-09-04","end":"2027-09-07","mode":"night","price":390,"min":3},
+  {"start":"2027-09-07","end":"2027-10-01","mode":"night","price":360,"min":3},
+  {"start":"2027-10-01","end":"2027-10-23","mode":"night","price":290,"min":3},
+  {"start":"2027-10-23","end":"2027-11-08","mode":"night","price":340,"min":3},
+  {"start":"2027-11-08","end":"2027-12-18","mode":"night","price":290,"min":3}];
+/* PRICES:END */
 
 /* ============ I18N ============ */
 function setLang(l){
@@ -883,6 +926,17 @@ function statusForDay(dstr){
   }
   return null;
 }
+function priceForDay(dstr){
+  for(var i=0;i<PRICE_CONFIG.length;i++){var p=PRICE_CONFIG[i];if(dstr>=p.start&&dstr<p.end)return p;}
+  return null;
+}
+function priceTip(p){
+  if(!p)return '';
+  var en=document.documentElement.lang==='en';
+  var eur=function(n){return en?'€'+n.toLocaleString('en-GB'):n.toLocaleString('fr-FR')+' €';};
+  if(p.mode==='night')return en?eur(p.price)+' / night · '+p.min+' nights minimum':eur(p.price)+' / nuit · '+p.min+' nuits minimum';
+  return en?eur(p.price)+' / week · '+p.min+' nights minimum':eur(p.price)+' la semaine · '+p.min+' nuits minimum';
+}
 function buildCalendar(){
   var grid=document.getElementById('calGrid'); grid.innerHTML='';
   var monthsFR=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
@@ -904,6 +958,8 @@ function buildCalendar(){
       var en=document.documentElement.lang==='en';
       var lbl=st==='booked'?(en?'booked':'réservé'):st==='option'?(en?'on hold':'en option'):(dstr<today?'':(en?'available':'disponible'));
       var pick=(!st&&dstr>=today)?' data-date="'+dstr+'"':'';
+      var tip=pick?priceTip(priceForDay(dstr)):'';
+      if(tip)pick+=' data-tip="'+tip+'" title="'+tip+'"';
       html+='<div class="'+cls+(pick?' pick':'')+'"'+pick+'>'+day+(lbl?'<span class="sr-only"> '+lbl+'</span>':'')+'</div>';
     }
     html+='</div></div>';
@@ -950,7 +1006,8 @@ function onPick(d){
   var a=document.getElementById('f-arrivee'), b=document.getElementById('f-depart');
   var st=document.getElementById('calStatus'), en=document.documentElement.lang==='en';
   if(!pickA||d<=pickA||b.value){pickA=d;a.value=d;b.value='';markPick();
-    st.textContent=en?'Check-in on '+fmtDate(d)+'. Now choose your check-out date.':'Arrivée le '+fmtDate(d)+'. Choisissez maintenant votre départ.';return;}
+    var tp=priceTip(priceForDay(d));
+    st.textContent=(en?'Check-in on '+fmtDate(d)+'. Now choose your check-out date.':'Arrivée le '+fmtDate(d)+'. Choisissez maintenant votre départ.')+(tp?' ('+tp+')':'');return;}
   b.value=d;markPick();
   st.textContent=en?'From '+fmtDate(pickA)+' to '+fmtDate(d)+': dates added to your request.':'Du '+fmtDate(pickA)+' au '+fmtDate(d)+' : dates ajoutées à votre demande.';
   document.getElementById('contact').scrollIntoView({behavior:'smooth'});
